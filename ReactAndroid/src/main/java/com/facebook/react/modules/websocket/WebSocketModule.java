@@ -37,6 +37,7 @@ import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
+import com.facebook.react.modules.network.OkHttpClientProvider;
 
 @ReactModule(name = WebSocketModule.NAME, hasConstants = false)
 public final class WebSocketModule extends ReactContextBaseJavaModule {
@@ -84,12 +85,12 @@ public final class WebSocketModule extends ReactContextBaseJavaModule {
     @Nullable final ReadableArray protocols,
     @Nullable final ReadableMap options,
     final int id) {
-    OkHttpClient client = new OkHttpClient.Builder()
-      .connectTimeout(10, TimeUnit.SECONDS)
-      .writeTimeout(10, TimeUnit.SECONDS)
-      .readTimeout(0, TimeUnit.MINUTES) // Disable timeouts for read
-      .build();
-
+    // OkHttpClient client = new OkHttpClient.Builder()
+    //   .connectTimeout(10, TimeUnit.SECONDS)
+    //   .writeTimeout(10, TimeUnit.SECONDS)
+    //   .readTimeout(0, TimeUnit.MINUTES) // Disable timeouts for read
+    //   .build();
+    OkHttpClient client = OkHttpClientProvider.createClient();
     Request.Builder builder = new Request.Builder().tag(id).url(url);
 
     String cookie = getCookie(url);
