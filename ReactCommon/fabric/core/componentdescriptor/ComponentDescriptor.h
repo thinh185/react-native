@@ -19,7 +19,7 @@ namespace react {
 
 class ComponentDescriptor;
 
-using SharedComponentDescriptor = std::shared_ptr<ComponentDescriptor>;
+using SharedComponentDescriptor = std::shared_ptr<ComponentDescriptor const>;
 
 /*
  * Abstract class defining an interface of `ComponentDescriptor`.
@@ -30,6 +30,7 @@ using SharedComponentDescriptor = std::shared_ptr<ComponentDescriptor>;
 class ComponentDescriptor {
  public:
   using Shared = std::shared_ptr<ComponentDescriptor const>;
+  using Unique = std::unique_ptr<ComponentDescriptor const>;
 
   ComponentDescriptor(
       EventDispatcher::Shared const &eventDispatcher,
